@@ -92,4 +92,19 @@ class Vouchers
 
         return $voucher;
     }
+
+    public function getVouchers(int $user=null)
+    {
+        if($user){
+            $vouchers = Voucher::where([['expires_at', '>', date('Y-m-d H:i:s')], ['data', 'like' , '%"user": "'.$user->id.'"%']])
+                ->orWhereNull('expires_at')
+                ->get();
+        } else {
+            $vouchers = Voucher::where('expires_at', '>', date('Y-m-d H:i:s'))
+                ->orWhereNull('expires_at')
+                ->get();
+        }
+
+        return $vouchers;
+    }
 }
