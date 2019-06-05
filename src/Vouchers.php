@@ -93,7 +93,12 @@ class Vouchers
         return $voucher;
     }
 
-    public function getVouchers(int $user=null)
+    /**
+     * Static Function
+     *  param $user
+     *  return $vouchers
+     */
+    public static function getVouchers(int $user=null)
     {
         if($user){
             $vouchers = Voucher::where([['expires_at', '>', date('Y-m-d H:i:s')], ['data', 'like' , '%"user": "'.$user->id.'"%']])
