@@ -101,7 +101,7 @@ class Vouchers
     public static function getVouchers(int $user=null)
     {
         if($user){
-            $vouchers = Voucher::where([['expires_at', '>', date('Y-m-d H:i:s')], ['data', 'like' , '%"user": "'.$user->id.'"%']])
+            $vouchers = Voucher::where([['expires_at', '>', date('Y-m-d H:i:s')], ['data', 'like' , '%"user": "'.$user.'"%']])
                 ->orWhereNull('expires_at')
                 ->get();
         } else {
